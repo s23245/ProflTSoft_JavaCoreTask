@@ -6,6 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.example.enums.HeroElements;
 
+/**
+ * The Hero class represents a main class for project.
+ * It includes properties such as class name, level, mana amount, abilities, and main element.
+ * It also includes methods to get and set these properties, with validation checks.
+ */
 @JsonAutoDetect
 @JsonPropertyOrder({"HeroClassName", "HeroLevel", "ManaAmount", "Abilities", "HeroMainElement"})
 public class Hero
@@ -21,9 +26,19 @@ public class Hero
 
     private HeroElements HeroMainElement;
 
+
     public Hero()
     {
     }
+
+    /**
+     * Constructor for Hero with all properties.
+     * @param HeroClassName The class name of the hero.
+     * @param HeroLevel The level of the hero.
+     * @param ManaAmount The mana amount of the hero.
+     * @param Abilities The abilities of the hero.
+     * @param HeroMainElement The main element of the hero.
+     */
     @JsonCreator
     public Hero(@JsonProperty("heroClassName") String HeroClassName,
                 @JsonProperty("heroLevel") int HeroLevel,
@@ -38,9 +53,11 @@ public class Hero
         setHeroMainElement(HeroMainElement);
     }
 
+
     public String getHeroClassName() {
         return HeroClassName;
     }
+
 
     public void setHeroClassName(String heroClassName)
     {
@@ -56,9 +73,11 @@ public class Hero
         this.HeroClassName = heroClassName;
     }
 
+
     public int getHeroLevel() {
         return HeroLevel;
     }
+
 
     public void setHeroLevel(int heroLevel)
     {
@@ -73,6 +92,7 @@ public class Hero
         return ManaAmount;
     }
 
+
     public void setManaAmount(int manaAmount)
     {
         if(manaAmount < 0)
@@ -82,9 +102,11 @@ public class Hero
         this.ManaAmount = manaAmount;
     }
 
+
     public String getAbilities() {
         return Abilities;
     }
+
 
     public void setAbilities(String abilities)
     {
@@ -99,9 +121,11 @@ public class Hero
         this.Abilities = abilities;
     }
 
+
     public String getHeroMainElement() {
         return HeroMainElement.toString();
     }
+
 
     public void setHeroMainElement(HeroElements heroMainElement)
     {
@@ -112,6 +136,10 @@ public class Hero
         this.HeroMainElement = heroMainElement;
     }
 
+    /**
+     * Overrides the toString method to provide a string representation of the Hero object.
+     * @return A string representation of the Hero object.
+     */
     @Override
     public String toString() {
         return "{" +
