@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class XMLWriter
 {
-    private final String FILE_NAME = "./result/statistics_by_";
+    private final String FILE_NAME = "./statistics_by_";
 
     /**
      * Writes the statistics to an XML file.
