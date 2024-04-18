@@ -3,6 +3,7 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import org.example.model.Hero;
+import org.example.model.Item;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * JSONReader is a class responsible for reading JSON files from a given directory and processing them.
@@ -37,7 +39,6 @@ public class JSONReader
      */
     public void readFiles(String directoryPath, String attribute)
     {
-        List<Thread> threads = new ArrayList<>();
         File directory = new File(directoryPath);
 
         if (!directory.isDirectory())
@@ -46,33 +47,27 @@ public class JSONReader
             return;
         }
 
+        List<Thread> threads = new ArrayList<>();
+
         try (var directoryStream = Files.newDirectoryStream(Path.of(directoryPath), "*.json"))
         {
             for (Path filePath : directoryStream)
             {
                 System.out.println("Reading file: " + filePath);
                 Thread thread = new Thread(() -> processFile(filePath.toFile(), attribute));
+
                 threads.add(thread);
                 thread.start();
-            }
 
-            for (Thread thread : threads)
-            {
-                try
-                {
-                    thread.join();
-                } catch (InterruptedException e)
-                {
-                    e.printStackTrace();
-                }
+
             }
+            joinThreads(threads);
         }
         catch (IOException e)
         {
             System.err.println("Error reading directory: " + directoryPath);
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -80,7 +75,7 @@ public class JSONReader
      * @param file The JSON file to be processed.
      * @param attribute The attribute to be processed in the JSON file.
      */
-    private void processFile(File file, String attribute)
+    public void processFile(File file, String attribute)
     {
         try
         {
@@ -99,4 +94,21 @@ public class JSONReader
             e.printStackTrace();
         }
     }
+
+    private void joinThreads(List<Thread> threads)
+    {
+        for (Thread thread : threads)
+        {
+            try
+            {
+                thread.join();
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }

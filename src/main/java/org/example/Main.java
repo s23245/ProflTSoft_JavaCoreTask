@@ -9,8 +9,7 @@ public class Main {
         StatisticsCount statisticsCount = new StatisticsCount();
         JSONReader jsonReader = new JSONReader(statisticsCount);
         XMLWriter xmlWriter = new XMLWriter();
-
-        jsonReader.readFiles(args[0],args[1]);
+        jsonReader.readFiles(args[0], args[1]);
 
         xmlWriter.writeFile(args[1],statisticsCount.getStatistics());
 

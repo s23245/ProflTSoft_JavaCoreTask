@@ -1,0 +1,16 @@
+[
+  {
+  "heroClassName": "Warrior",
+  "heroLevel" : 1,
+  "manaAmount" : 100,
+  "abilities" : "Slash, ShieldBash, Charge",
+  "heroMainElement": "EARTH"
+  },
+  {
+    "heroClassName": "Wizard",
+    "heroLevel" : 1,
+    "manaAmount" : 250,
+    "abilities" : "Fireball, Firestorm, Meteor",
+    "heroMainElement": "FIRE"
+  }
+]
